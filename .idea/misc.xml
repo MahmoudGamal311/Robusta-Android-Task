@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Gogga/RobustaTask/code/Robusta-Android-Task/app/src/main/res/drawable-v24/border_background.xml" value="0.2" />
+        <entry key="..\:/Gogga/RobustaTask/code/Robusta-Android-Task/app/src/main/res/drawable-v24/button_background.xml" value="0.2" />
+        <entry key="..\:/Gogga/RobustaTask/code/Robusta-Android-Task/app/src/main/res/layout/activity_adding_new_image_screen.xml" value="0.1921875" />
+        <entry key="..\:/Gogga/RobustaTask/code/Robusta-Android-Task/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Gogga/RobustaTask/code/Robusta-Android-Task/app/src/main/res/layout/activity_splash_screen.xml" value="0.1921875" />
+        <entry key="..\:/Gogga/RobustaTask/code/Robusta-Android-Task/app/src/main/res/layout/custom_dialog.xml" value="0.1921875" />
+        <entry key="..\:/Gogga/RobustaTask/code/Robusta-Android-Task/app/src/main/res/layout/home_grid_single_item.xml" value="0.1" />
+        <entry key="..\:/Gogga/RobustaTask/code/Robusta-Android-Task/app/src/main/res/layout/loading_popup.xml" value="0.1" />
         <entry key="..\:/Gogga/RobustaTask/code/app/src/main/res/drawable-v24/border_background.xml" value="0.2" />
         <entry key="..\:/Gogga/RobustaTask/code/app/src/main/res/drawable-v24/button_background.xml" value="0.2" />
         <entry key="..\:/Gogga/RobustaTask/code/app/src/main/res/layout/activity_adding_new_image_screen.xml" value="0.3" />

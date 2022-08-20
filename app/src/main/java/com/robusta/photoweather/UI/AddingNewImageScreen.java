@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -24,18 +23,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
 import com.robusta.Other.Config;
 import com.robusta.Other.MyLoadingProgressDialog;
 import com.robusta.photoweather.Data.Model.APIResponseModel;
 import com.robusta.photoweather.R;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,15 +63,11 @@ public class AddingNewImageScreen extends AppCompatActivity {
         finalResult = findViewById(R.id.final_result_layout);
 
         backToHomeButton = findViewById(R.id.back_to_home_btn);
-        backToHomeButton.setOnClickListener(view -> {
-            backToHome();
-        });
+        backToHomeButton.setOnClickListener(view -> backToHome());
 
         deleteButton = findViewById(R.id.delete_image_btn);
         deleteButton.setVisibility(View.GONE);
-        deleteButton.setOnClickListener(view -> {
-            resetImage();
-        });
+        deleteButton.setOnClickListener(view -> resetImage());
 
         CameraResult = findViewById(R.id.camera_photo_result);
 
@@ -113,16 +101,10 @@ public class AddingNewImageScreen extends AppCompatActivity {
             finalResultBitmap = finalResult.getDrawingCache();
 
             if (Config.addImageToHistoryArray(Config.encodeBitmapToString(finalResultBitmap))) {
-                Set<String> temp = SplashScreen.sharedPreferences.getStringSet(SplashScreen.HISTORY_LIST_TAG, new HashSet<String>());
                 backToHome();
             } else {
                 Toast.makeText(this, "Something went wrong,Image can't be saved successfully", Toast.LENGTH_SHORT).show();
             }
-
-
-//            Config.ShareImage(AddingNewImageScreen.this,finalResultBitmap);
-
-
         });
 
     }
@@ -135,16 +117,12 @@ public class AddingNewImageScreen extends AppCompatActivity {
     }
 
     private void resetImage() {
-
-        finalResult = findViewById(R.id.final_result_layout);
-
         CameraResult.setImageBitmap(null);
         takePhotoButton.setVisibility(View.VISIBLE);
         deleteButton.setVisibility(View.GONE);
         weatherInfoResult.setVisibility(View.GONE);
         getWeatherInfoButton.setVisibility(View.GONE);
         saveButton.setVisibility(View.GONE);
-
     }
 
     private void callWeatherAPI() {
@@ -159,7 +137,9 @@ public class AddingNewImageScreen extends AppCompatActivity {
                 if (response.body() != null) {
                     weatherInfoResult.setText("Place : " + response.body().getName()
                             + "\nTemp : " + response.body().getMain().getTemp() + " C"
-                            + "\nCondition : " + response.body().getWeather().get(0).getDescription());
+                            + "\nCondition : " + response.body().getWeather().get(0).getDescription()
+                            + "\nPressure : " + response.body().getMain().getPressure()
+                            + "\nHumidity : " + response.body().getMain().getHumidity() + " %");
 
                     weatherInfoResult.setVisibility(View.VISIBLE);
                     saveButton.setVisibility(View.VISIBLE);
@@ -191,7 +171,6 @@ public class AddingNewImageScreen extends AppCompatActivity {
         if (requestCode == MY_LOCATION_PERMISSION_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "location permission granted", Toast.LENGTH_SHORT).show();
-//                getCurrentLocation();
             } else {
                 Toast.makeText(this, "location permission denied", Toast.LENGTH_SHORT).show();
             }
@@ -284,14 +263,5 @@ public class AddingNewImageScreen extends AppCompatActivity {
         }
 
     }
-
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//
-//        SplashScreen.editor.putStringSet(SplashScreen.HISTORY_LIST_TAG, SplashScreen.History);
-//        SplashScreen.editor.commit();
-//    }
-
 }
 

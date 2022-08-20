@@ -6,4 +6,7 @@
     <string name="get_current_weather_info_btn_label">Get current weather info</string>
     <string name="share_btn_label">Share</string>
     <string name="save_btn_label">Save</string>
+    <string name="back_to_home_btn_label">Back to home</string>
+    <string name="no_previous_images_available_label">No previous images available</string>
+    <string name="loading_please_wait">Loading please Wait</string>
 </resources>

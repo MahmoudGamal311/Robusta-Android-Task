@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.robusta.Other.Config;
+import com.robusta.Other.FullScreenImage;
 import com.robusta.photoweather.R;
 
 import java.util.ArrayList;
@@ -52,7 +53,12 @@ public class HistoryGridAdapter extends BaseAdapter {
 
         ImageView brandImage = grid.findViewById(R.id.home_grid_history_image);
         brandImage.setImageBitmap(Config.decodeStringToBitmap(historyList.get(i)));
+        brandImage.setOnClickListener(view12 -> {
+            FullScreenImage fullScreenImage = new FullScreenImage(Config.decodeStringToBitmap(historyList.get(i)), mContext);
+            fullScreenImage.show();
+        });
 
         return grid;
     }
+
 }

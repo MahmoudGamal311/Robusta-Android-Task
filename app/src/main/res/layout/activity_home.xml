@@ -51,7 +51,7 @@
         android:layout_marginBottom="5dp"
         android:padding="5dp"
         android:visibility="gone"
-        android:text="No previous images available"
+        android:text="@string/no_previous_images_available_label"
         android:textColor="@color/black"
         android:textSize="22sp" />
 
