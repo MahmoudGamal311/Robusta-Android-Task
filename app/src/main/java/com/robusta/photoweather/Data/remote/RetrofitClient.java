@@ -1,8 +1,5 @@
 package com.robusta.photoweather.Data.remote;
 
-
-
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;

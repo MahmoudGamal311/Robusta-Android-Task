@@ -38,9 +38,8 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        Set<String> set = SplashScreen.sharedPreferences.getStringSet(SplashScreen.HISTORY_LIST_TAG, null);
 
-        Set<String> historyList = SplashScreen.sharedPreferences.getStringSet(SplashScreen.HISTORY_LIST_TAG, new HashSet<String>());
+        Set<String> historyList = SplashScreen.sharedPreferences.getStringSet(SplashScreen.HISTORY_LIST_TAG, new HashSet<>());
 
         if (historyList != null) {
             if (historyList.size() == 0) {
@@ -56,12 +55,4 @@ public class HomeScreen extends AppCompatActivity {
             noHistory.setVisibility(View.VISIBLE);
         }
     }
-
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//
-//        SplashScreen.editor.putStringSet(SplashScreen.HISTORY_LIST_TAG, SplashScreen.History);
-//        SplashScreen.editor.commit();
-//    }
 }

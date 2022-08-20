@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -17,17 +16,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import com.robusta.photoweather.UI.AddingNewImageScreen;
 import com.robusta.photoweather.UI.SplashScreen;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -65,15 +59,13 @@ public class Config {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] b = baos.toByteArray();
-        String encoded = Base64.encodeToString(b, Base64.DEFAULT);
 
-        return encoded;
+        return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
     public static Bitmap decodeStringToBitmap(String s) {
         byte[] imageAsBytes = Base64.decode(s.getBytes(), Base64.DEFAULT);
-        Bitmap result = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
-        return result;
+        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 
 
@@ -82,19 +74,14 @@ public class Config {
             return false;
 
         Set<String> list = SplashScreen.sharedPreferences.getStringSet(SplashScreen.HISTORY_LIST_TAG, null);
-        Set<String> newList = new TreeSet<String>();
-        if (encodedBitmap != "") {
-            if (list != null) {
-                for (String each : list) {
-                    newList.add(each);
-                }
-            }
-            newList.add(encodedBitmap);
-            SplashScreen.editor.putStringSet(SplashScreen.HISTORY_LIST_TAG, newList);
-            SplashScreen.editor.apply();
-            return true;
-        } else
-            return false;
+        Set<String> newList = new TreeSet<>();
+        if (list != null) {
+            newList.addAll(list);
+        }
+        newList.add(encodedBitmap);
+        SplashScreen.editor.putStringSet(SplashScreen.HISTORY_LIST_TAG, newList);
+        SplashScreen.editor.apply();
+        return true;
 
     }
 
@@ -102,8 +89,8 @@ public class Config {
     public static void ShareImage(Context context, Bitmap bitmap) {
         try {
             File cachePath = new File(context.getCacheDir(), "images");
-            cachePath.mkdirs(); // don't forget to make the directory
-            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); // overwrites this image every time
+            cachePath.mkdirs();
+            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png");
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             stream.close();
 
@@ -119,7 +106,7 @@ public class Config {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
-            shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // temp permission for receiving app to read this file
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             shareIntent.setDataAndType(contentUri, context.getContentResolver().getType(contentUri));
             shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
             context.startActivity(Intent.createChooser(shareIntent, "Choose an app"));

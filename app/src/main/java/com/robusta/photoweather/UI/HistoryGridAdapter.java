@@ -48,18 +48,11 @@ public class HistoryGridAdapter extends BaseAdapter {
         grid = inflater.inflate(R.layout.home_grid_single_item, null);
 
         TextView shareButton = grid.findViewById(R.id.home_grid_share_btn);
-        shareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Config.ShareImage(mContext, Config.decodeStringToBitmap(historyList.get(i)));
-            }
-        });
+        shareButton.setOnClickListener(view1 -> Config.ShareImage(mContext, Config.decodeStringToBitmap(historyList.get(i))));
 
         ImageView brandImage = grid.findViewById(R.id.home_grid_history_image);
         brandImage.setImageBitmap(Config.decodeStringToBitmap(historyList.get(i)));
 
-
         return grid;
-
     }
 }
