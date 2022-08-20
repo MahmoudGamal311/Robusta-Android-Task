@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PhotoWeather</string>
+    <string name="add_new_image_btn_label">Add New Image</string>
+    <string name="history_list_title">History List</string>
+    <string name="take_a_photo_btn_label">Take a Photo</string>
+    <string name="get_current_weather_info_btn_label">Get current weather info</string>
+    <string name="share_btn_label">Share</string>
+    <string name="save_btn_label">Save</string>
+</resources>
